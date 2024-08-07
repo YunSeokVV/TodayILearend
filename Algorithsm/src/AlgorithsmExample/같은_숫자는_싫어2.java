@@ -1,32 +1,36 @@
 package AlgorithsmExample;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class 같은_숫자는_싫어2 {
     public static void main(String[] args) {
-        int[] answer = {1,1,3,3,0,1,1};
-        int[] answer2 = {4,4,4,3,3};
+        int[] answer = {1, 1, 3, 3, 0, 1, 1};
+        int[] answer2 = {4, 4, 4, 3, 3};
 
         같은_숫자는_싫어2 ihateSameNumber = new 같은_숫자는_싫어2();
-        ihateSameNumber.solution(answer2);
+        ihateSameNumber.solution(answer);
     }
 
-    public int[] solution(int []arr) {
-        int[] answer = arr;
+    public ArrayList solution(int[] arr) {
+        ArrayList<Integer> answer2 = new ArrayList<>();
         Stack<Integer> stackInt = new Stack<>();
 
-        for(int i=answer.length-1;i>=0;i--){
-            stackInt.push(answer[i]);
+        for (int i = arr.length - 1; i>=0; i--) {
+            stackInt.push(arr[i]);
         }
 
-        for(int i=0;i<stackInt.size();i++){
-            if(stackInt.get(i) == stackInt.get(i+1)){
-                stackInt.pop();
+        int tmp = stackInt.peek();
+        answer2.add(tmp);
+
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] == tmp){
+
+            } else {
+                answer2.add(arr[i]);
+                tmp = arr[i];
             }
         }
-
-        System.out.print("stack"+stackInt +" ");
-
-        return answer;
+        return answer2;
     }
 }
