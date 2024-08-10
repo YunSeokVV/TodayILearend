@@ -1,6 +1,11 @@
 plugins {
-    alias(libs.plugins.android.application)
+    //alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("com.android.application")
+    id("com.google.dagger.hilt.android")
+
+    //id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -36,7 +41,10 @@ android {
 }
 
 dependencies {
-
+    //annotationProcessor 'com.google.dagger:hilt-compiler:2.52'
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-compiler:2.52")
+    implementation("com.orhanobut:logger:2.2.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,4 +53,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
