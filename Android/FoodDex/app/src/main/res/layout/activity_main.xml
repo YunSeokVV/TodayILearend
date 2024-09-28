@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="main"
-            type="com.example.fooddex.ui.list.MainActivity" />
+            type="com.example.fooddex.ui.main.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
