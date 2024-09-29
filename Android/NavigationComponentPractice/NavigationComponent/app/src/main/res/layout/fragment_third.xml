@@ -11,31 +11,19 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="두번째 프레그먼트"
+            android:text="세번째 프레그먼트"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="넘길 데이터를 입력해 보세요"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="첫번째 화면에서 받은 데이터"
-
-            app:layout_constraintBottom_toTopOf="@+id/editText"
+            android:text="두번째 화면에서 받은 데이터"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,12 +42,12 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="세번째 화면으로 가보자"
+            android:text="첫번째 화면으로 가보자"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

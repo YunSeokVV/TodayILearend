@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidx.navigation.safe.args)
 }
 
 android {
@@ -42,7 +43,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.databinding.runtime)
-    val nav_version = "2.8.1"
+    val nav_version = "2.4.1"
     // Views/Fragments integration
     implementation("androidx.navigation:navigation-fragment:$nav_version")
     implementation("androidx.navigation:navigation-ui:$nav_version")

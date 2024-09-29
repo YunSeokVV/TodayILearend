@@ -2,16 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/mainFragment"
-        android:icon="@android:drawable/ic_menu_upload"
-        android:title="Upload" />
+        android:title="첫번째 화면" />
 
     <item
         android:id="@+id/secondFragment"
-        android:icon="@android:drawable/ic_menu_camera"
-        android:title="Camera" />
+        android:title="두번째 화면" />
 
     <item
         android:id="@+id/thirdFragmnet"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Add" />
+        android:title="세번째 화면" />
 </menu>

@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/secondFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.navigationcomponent.ui.fragment.MainFragment"
-        android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_secondFragment"
@@ -17,13 +16,28 @@
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.navigationcomponent.ui.fragment.secondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        android:name="com.example.navigationcomponent.ui.fragment.SecondFragment"
+        tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment"
+            app:destination="@id/thirdFragmnet"
+            />
+        <argument
+            android:name="message"
+            android:defaultValue="nothingReceived"/>
+    </fragment>
 
     <fragment
         android:id="@+id/thirdFragmnet"
-        android:name="com.example.navigationcomponent.ui.fragment.thirdFragmnet"
-        android:label="fragment_third_fragmnet"
-        tools:layout="@layout/fragment_third_fragmnet" />
+        android:name="com.example.navigationcomponent.ui.fragment.ThirdFragmnet"
+        tools:layout="@layout/fragment_third">
+        <action
+            android:id="@+id/action_thirdFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            />
+        <argument
+            android:name="message2"
+            android:defaultValue="nothingReceived"/>
+    </fragment>
 </navigation>
