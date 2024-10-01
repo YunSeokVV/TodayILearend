@@ -4,5 +4,15 @@ https://joo-selfdev.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93
 
 https://aal-izz-well.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9CJetPack-Navigation-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC
 
+navigation에서 중요한 개념들
+1. navigationHost
+2. navigationController
+
 popup 이랑 popupToInclusive 에 대해 잘 설명한 블로그
 https://amuru.tistory.com/310
+
+이 예제를 통해서 공부할 수 있는 주제들.
+1. navigationHost
+2. navigationController
+3. navigation graph
+4. popUpTo / popUpToInclusive
