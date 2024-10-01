@@ -31,10 +31,13 @@
         android:id="@+id/thirdFragmnet"
         android:name="com.example.navigationcomponent.ui.fragment.ThirdFragmnet"
         tools:layout="@layout/fragment_third">
+        <!-- popUpTo 속성과 popupToInclusive 속성을 활용해서 어떻게 동작하는지 익혀보자. -->
+        <!-- popUpTo 속성은 thirdFragment에서 mainFragment로 이동할때 발생하는 이벤트다. 뒤로가기를 누르면 스택에 있던 secondFragment는 사라져버린다.-->
         <action
             android:id="@+id/action_thirdFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"
             />
         <argument
             android:name="message2"
