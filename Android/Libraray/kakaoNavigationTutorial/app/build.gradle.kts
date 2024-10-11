@@ -19,6 +19,7 @@ android {
     }
 
     val KAKAO_API_KEY = localProperties.getProperty("KAKAO_API_KEY")
+    val USER_KEY = localProperties.getProperty("USER_KEY")
 
     defaultConfig {
         applicationId = "com.example.kakaoNavigationPractice"
@@ -29,7 +30,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_API_KEY", getApiKey("KAKAO_API_KEY"))
+        buildConfigField("String", "USER_KEY", getApiKey("USER_KEY"))
         resValue("string", "KAKAO_API_KEY", KAKAO_API_KEY)
+        resValue("string", "USER_KEY", USER_KEY)
     }
     buildTypes {
         release {

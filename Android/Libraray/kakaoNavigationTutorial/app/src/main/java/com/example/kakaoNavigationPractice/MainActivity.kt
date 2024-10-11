@@ -1,18 +1,12 @@
 package com.example.kakaoNavigationPractice
-
-import android.app.NativeActivity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.kakaomobility.knsdk.KNLanguageType
 
 
@@ -42,10 +36,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED -> {
                 // GPS 퍼미션 체크
+                gpsPermissionCheck()
             }
 
             else -> {
                 // 길찾기 SDK 인증
+                knsdkAuth()
             }
         }
 
@@ -83,7 +79,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             initializeWithAppKey(
                 aAppKey = BuildConfig.KAKAO_API_KEY,
                 aClientVersion = "1.0.0",                                               // 현재 앱의 클라이언트 버전
-                aUserKey = "testUser",                                                  // 사용자 id
+                aUserKey = BuildConfig.USER_KEY,                                                  // 사용자 id
                 aLangType = KNLanguageType.KNLanguageType_KOREAN,   // 언어 타입
                 aCompletion = {
 
@@ -93,7 +89,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             Toast.makeText(applicationContext, "authenticationFailed",Toast.LENGTH_SHORT).show()
                         } else{
                             Toast.makeText(applicationContext, "authenticationCompleted",Toast.LENGTH_SHORT).show()
-                            var intent = Intent(this@MainActivity, NativeActivity::class.java)
+                            var intent = Intent(this@MainActivity, NaviActivity::class.java)
                             this@MainActivity.startActivity(intent)
                         }
                     }
@@ -101,5 +97,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             )
         }
     }
-
 }
