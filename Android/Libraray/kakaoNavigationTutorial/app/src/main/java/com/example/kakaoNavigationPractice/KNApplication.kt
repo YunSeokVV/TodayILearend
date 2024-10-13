@@ -2,6 +2,9 @@ package com.example.kakaoNavigationPractice
 
 import android.app.Application
 import com.kakaomobility.knsdk.KNSDK
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+
 
 class KNApplication : Application(){
     companion object {
@@ -11,6 +14,7 @@ class KNApplication : Application(){
     override fun onCreate() {
         super.onCreate()
         initalize()
+        Logger.addLogAdapter(AndroidLogAdapter())
     }
 
     /**

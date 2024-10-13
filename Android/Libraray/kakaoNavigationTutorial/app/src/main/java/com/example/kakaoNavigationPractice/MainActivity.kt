@@ -1,26 +1,49 @@
 package com.example.kakaoNavigationPractice
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.kakaomobility.knsdk.KNLanguageType
+import com.orhanobut.logger.Logger
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var btnGuide: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
+        getKeyHash()
+
         btnGuide = findViewById(R.id.btn_guide)
         btnGuide.setOnClickListener(this)
+    }
+
+    fun getKeyHash() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val packageInfo = this.packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+            for (signature in packageInfo.signingInfo.apkContentsSigners) {
+                try {
+                    val md = MessageDigest.getInstance("SHA")
+                    md.update(signature.toByteArray())
+                    Logger.v("key hash: ${Base64.encodeToString(md.digest(), Base64.NO_WRAP)}")
+
+                } catch (e: NoSuchAlgorithmException) {
+                    //Logger.v("Unable to get MessageDigest. signature=$signature", e)
+                }
+            }
+        }
     }
 
     // 버튼 클릭 이벤트
@@ -87,6 +110,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     runOnUiThread{
                         if(it != null){
                             Toast.makeText(applicationContext, "authenticationFailed",Toast.LENGTH_SHORT).show()
+                            Logger.v("msg $it.msg")
+                            Logger.v("msg ${it.code}")
                         } else{
                             Toast.makeText(applicationContext, "authenticationCompleted",Toast.LENGTH_SHORT).show()
                             var intent = Intent(this@MainActivity, NaviActivity::class.java)

@@ -70,7 +70,7 @@ fun getApiKey(propertyKey: String): String {
 
 dependencies {
     implementation("com.kakaomobility.knsdk:knsdk_ui:1.9.4")
-
+    implementation ("com.orhanobut:logger:2.2.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
