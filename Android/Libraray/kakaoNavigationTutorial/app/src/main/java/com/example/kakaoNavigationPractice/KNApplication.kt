@@ -4,8 +4,9 @@ import android.app.Application
 import com.kakaomobility.knsdk.KNSDK
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.HiltAndroidApp
 
-
+@HiltAndroidApp
 class KNApplication : Application(){
     companion object {
         lateinit var knsdk : KNSDK

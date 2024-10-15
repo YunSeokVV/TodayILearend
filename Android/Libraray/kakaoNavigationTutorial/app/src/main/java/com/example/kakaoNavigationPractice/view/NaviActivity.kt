@@ -1,10 +1,12 @@
-package com.example.kakaoNavigationPractice
+package com.example.kakaoNavigationPractice.view
 
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kakaoNavigationPractice.KNApplication
+import com.example.kakaoNavigationPractice.R
 import com.kakaomobility.knsdk.KNRoutePriority
 import com.kakaomobility.knsdk.common.objects.KNError
 import com.kakaomobility.knsdk.common.objects.KNPOI
