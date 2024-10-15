@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt) apply false
 }
 
 android {
@@ -69,6 +70,9 @@ fun getApiKey(propertyKey: String): String {
 
 
 dependencies {
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
     implementation("com.kakaomobility.knsdk:knsdk_ui:1.9.4")
     implementation ("com.orhanobut:logger:2.2.0")
     implementation(libs.androidx.core.ktx)
