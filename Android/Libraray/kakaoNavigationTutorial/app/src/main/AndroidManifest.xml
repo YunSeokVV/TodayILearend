@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.NaviActivity"
+            android:name=".view.navi.NaviActivity"
             android:configChanges="orientation"
             android:theme="@style/AppTheme"/>
     </application>

@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import com.example.kakaoNavigationPractice.BuildConfig
 import com.example.kakaoNavigationPractice.KNApplication
 import com.example.kakaoNavigationPractice.R
+import com.example.kakaoNavigationPractice.view.navi.NaviActivity
 import com.kakaomobility.knsdk.KNLanguageType
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint

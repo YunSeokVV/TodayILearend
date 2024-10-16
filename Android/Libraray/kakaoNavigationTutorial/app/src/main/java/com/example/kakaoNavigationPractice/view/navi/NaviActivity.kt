@@ -1,4 +1,4 @@
-package com.example.kakaoNavigationPractice.view
+package com.example.kakaoNavigationPractice.view.navi
 
 import android.graphics.Color
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kakaoNavigationPractice.KNApplication
 import com.example.kakaoNavigationPractice.R
+import com.kakaomobility.knsdk.KNCarFuel
+import com.kakaomobility.knsdk.KNCarType
+import com.kakaomobility.knsdk.KNCarUsage
 import com.kakaomobility.knsdk.KNRoutePriority
 import com.kakaomobility.knsdk.common.objects.KNError
 import com.kakaomobility.knsdk.common.objects.KNPOI
@@ -24,6 +27,7 @@ import com.kakaomobility.knsdk.guidance.knguidance.routeguide.objects.KNMultiRou
 import com.kakaomobility.knsdk.guidance.knguidance.safetyguide.KNGuide_Safety
 import com.kakaomobility.knsdk.guidance.knguidance.safetyguide.objects.KNSafety
 import com.kakaomobility.knsdk.guidance.knguidance.voiceguide.KNGuide_Voice
+import com.kakaomobility.knsdk.trip.knrouteconfiguration.KNRouteConfiguration
 import com.kakaomobility.knsdk.trip.kntrip.KNTrip
 import com.kakaomobility.knsdk.trip.kntrip.knroute.KNRoute
 import com.kakaomobility.knsdk.ui.view.KNNaviView
@@ -32,6 +36,7 @@ class NaviActivity : AppCompatActivity(), KNGuidance_GuideStateDelegate,
     KNGuidance_LocationGuideDelegate, KNGuidance_SafetyGuideDelegate, KNGuidance_VoiceGuideDelegate, KNGuidance_CitsGuideDelegate{
     val TAG = "NaviActivity"
     lateinit var naviView :  KNNaviView
+
     override fun guidanceCheckingRouteChange(aGuidance: KNGuidance) {
         naviView.guidanceCheckingRouteChange(aGuidance)
     }
@@ -86,8 +91,20 @@ class NaviActivity : AppCompatActivity(), KNGuidance_GuideStateDelegate,
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
+        // 음량 설정하기 0 ~ 1 까지 조절 가능(Float임 0 ~ 100임)
+        naviView.sndVolume = 1.0f
+
+        // 차량에 대한 정보를 설정한다. 이 설정값에 따라서 주행 안내를 해주기 때문에 설정이 필요하다.
+        // 부모님 차가 휘발유니까 그냥 가솔린으로 설정
+        naviView.fuelType = KNCarFuel.KNCarFuel_Gasoline
+        // 차량 기본 종류 설정
+        naviView.carType = KNCarType.KNCarType_1
+
+
         requestRoute()
     }
+
+    // 보다 정확한 안내를 위해서 차량의 종류,하이패스 장착 유무, 교통사고나 공사로 인한 도로 제한 등을 반여할지 설정한다.
 
     fun requestRoute() {
         Thread {
@@ -95,7 +112,7 @@ class NaviActivity : AppCompatActivity(), KNGuidance_GuideStateDelegate,
             val startPoi = KNPOI("현위치", 309840, 552483, "현위치")
             val goalPoi = KNPOI("목적지", 321497, 532896, "목적지")
 
-            KNApplication.knsdk.makeTripWithStart(
+            val trip = KNApplication.knsdk.makeTripWithStart(
                 aStart = startPoi,
                 aGoal = goalPoi,
                 aVias = null
