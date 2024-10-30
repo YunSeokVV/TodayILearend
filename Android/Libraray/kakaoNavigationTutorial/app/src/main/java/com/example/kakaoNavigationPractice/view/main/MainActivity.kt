@@ -1,4 +1,4 @@
-package com.example.kakaoNavigationPractice.view
+package com.example.kakaoNavigationPractice.view.main
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build

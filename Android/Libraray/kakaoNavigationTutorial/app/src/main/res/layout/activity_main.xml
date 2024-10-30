@@ -5,17 +5,26 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.main.MainActivity">
 
     <!-- 인증 버튼 생성 -->
     <Button
         android:id="@+id/btn_guide"
-        android:layout_width="120dp"
+        android:layout_width="160dp"
         android:layout_height="60dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="인증하기"
+        android:text="지도안내 시작하기"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아무 목적지나 찾기"
+        app:layout_constraintBottom_toTopOf="@+id/btn_guide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
