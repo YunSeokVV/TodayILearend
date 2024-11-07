@@ -20,6 +20,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 kakao-maps = "com.kakao.maps.open:android:2.12.8"
+orhanobut = "com.orhanobut:logger:2.2.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
