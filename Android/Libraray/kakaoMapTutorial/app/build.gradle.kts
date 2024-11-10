@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.orhanobut)
     implementation(libs.kakao.maps)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
