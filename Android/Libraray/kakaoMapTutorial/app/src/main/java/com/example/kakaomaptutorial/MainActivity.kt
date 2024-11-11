@@ -1,5 +1,7 @@
 package com.example.kakaomaptutorial
 
+
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,11 +13,17 @@ import com.kakao.vectormap.MapOverlay
 import com.kakao.vectormap.MapType
 import com.kakao.vectormap.MapView
 import com.kakao.vectormap.MapViewInfo
+import com.kakao.vectormap.Poi
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.LabelStyles
 import com.kakao.vectormap.label.LabelTextBuilder
-import com.kakao.vectormap.label.LabelTextStyle
+import com.kakao.vectormap.mapwidget.InfoWindow
+import com.kakao.vectormap.mapwidget.InfoWindowOptions
+import com.kakao.vectormap.mapwidget.component.GuiImage
+import com.kakao.vectormap.mapwidget.component.GuiLayout
+import com.kakao.vectormap.mapwidget.component.GuiText
+import com.kakao.vectormap.mapwidget.component.Orientation
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 
@@ -23,6 +31,7 @@ import com.orhanobut.logger.Logger
 class MainActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
     private lateinit var kakaoMaps: KakaoMap
+    private lateinit var infoWindow : InfoWindow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,20 +58,10 @@ class MainActivity : AppCompatActivity() {
                 // 예제 프로젝트 : https://apis.map.kakao.com/android_v2/sample/
                 kakaoMaps = kakaoMap
 
-
-                // 라벨 예제
-                // https://apis.map.kakao.com/android_v2/docs/api-guide/label/
-                kakaoMaps.labelManager
-
                 // 1. LabelStyles 생성하기 - Icon 이미지 하나만 있는 스타일
                 val styles = kakaoMaps.labelManager?.addLabelStyles(
                     LabelStyles.from(
-                        LabelStyle.from(R.drawable.mark2x).setTextStyles(100, Color.RED)
-                            .setZoomLevel(0),
-                        LabelStyle.from(R.drawable.mark2x).setTextStyles(75, Color.RED)
-                            .setZoomLevel(5),
-                        LabelStyle.from(R.drawable.mark8x).setTextStyles(30, Color.RED)
-                            .setZoomLevel(10)
+                        LabelStyle.from(R.drawable.marker).setTextStyles(75, Color.RED)
                     )
                 )
 
@@ -74,7 +73,6 @@ class MainActivity : AppCompatActivity() {
                 val layer = kakaoMaps.labelManager?.getLayer()
                 // 4. LabelLayer 에 LabelOptions 을 넣어 Label 생성하기
                 val label = layer?.addLabel(options)
-
 
                 // MapViewInfo 는 지도 시작 시에 KakaoMapReadyCallback 을 통해 설정 할 수 있습니다. 아래 코드는 지도 실행 중간에 MapViewInfo 를 변경하는 예제코드입니다.
                 kakaoMaps.setOnMapViewInfoChangeListener(object :
@@ -96,6 +94,11 @@ class MainActivity : AppCompatActivity() {
                 // https://apis.map.kakao.com/android_v2/docs/getting-started/maptype_overlay/
                 kakaoMaps.showOverlay(MapOverlay.HILLSHADING)   // 지형도
                 //kakaoMaps.showOverlay(MapOverlay.BICYCLE_ROAD)   // 자전거도로
+
+                kakaoMap.setOnMapClickListener { kakaoMap, position, screenPoint, poi ->
+                    //showPicture(position, poi)
+                    showInfoWindow(position, poi)
+                }
 
             }
 
@@ -138,6 +141,71 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         mapView.pause();    // MapView 의 pause 호출
 
+    }
+
+    private fun showPicture(position : LatLng, poi : Poi){
+
+        val guiLayout = GuiLayout(Orientation.Vertical)
+        val image = GuiImage(BitmapFactory.decodeResource(this.resources, R.drawable.dongchunhouse))
+
+        guiLayout.setBackground(image)
+
+        //val options = InfoWindowOptions.from(position)
+
+        val options = InfoWindowOptions.from(position)
+        options.setBody(guiLayout)
+        options.setBodyOffset(0f, -4f)
+        //options.setTail(GuiImage(R.drawable.window_tail, false))
+
+        infoWindow = kakaoMaps.getMapWidgetManager()?.getInfoWindowLayer()!!.addInfoWindow(options)
+
+    }
+
+
+    private fun showInfoWindow(position: LatLng, poi: Poi) {
+        if (infoWindow != null) {
+            infoWindow.remove()
+        }
+
+        val body = GuiLayout(Orientation.Vertical)
+        body.setPadding(15, 15, 15, 13)
+        val image = GuiImage(R.drawable.dongchunhouse, true)
+        image.setFixedArea(7, 7, 7, 7)
+        body.setBackground(image)
+
+        var text = GuiText("isPoi= " + poi.isPoi())
+        text.setTextSize(23)
+        text.paddingRight = 13
+
+        body.addView(text)
+
+        if (poi.isPoi()) {
+            text = GuiText("LayerId=" + poi.getLayerId())
+            text.setTextSize(23)
+            text.paddingTop = 8
+            text.setTextColor(Color.parseColor("#003F63"))
+            body.addView(text)
+
+            text = GuiText("PoiId=" + poi.getPoiId())
+            text.setTextSize(23)
+            text.paddingTop = 8
+            text.setTextColor(Color.parseColor("#003F63"))
+            body.addView(text)
+
+            text = GuiText("Name=" + poi.getName())
+            text.setTextSize(23)
+            text.paddingTop = 8
+            text.setTextColor(Color.parseColor("#003F63"))
+            body.addView(text)
+        }
+
+        val options = InfoWindowOptions.from(position)
+        options.setBody(body)
+        options.setBodyOffset(0f, -4f)
+        //options.setTail(GuiImage(R.drawable.dongchunhouse, false))
+
+        //infoWindow = kakaoMaps.getMapWidgetManager()?.getInfoWindowLayer()!!.addInfoWindow(options)
+        infoWindow = kakaoMaps.mapWidgetManager?.infoWindowLayer!!.addInfoWindow(options)
     }
 
 }
