@@ -47,6 +47,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 
 }
@@ -62,4 +63,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // 컴파일러는 1.9.1이 최신이라고 한다. 하지만 공식문서는 1.6.0임.
+    //https://developers.kakaomobility.com/docs/android/start/
+    implementation(libs.knsdk.ui)
 }

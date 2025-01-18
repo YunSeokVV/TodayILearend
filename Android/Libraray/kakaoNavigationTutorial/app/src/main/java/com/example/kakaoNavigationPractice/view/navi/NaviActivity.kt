@@ -106,7 +106,6 @@ class NaviActivity : AppCompatActivity(), KNGuidance_GuideStateDelegate,
         // 차량 기본 종류 설정
         naviView.carType = KNCarType.KNCarType_1
 
-
         requestRoute()
     }
 
