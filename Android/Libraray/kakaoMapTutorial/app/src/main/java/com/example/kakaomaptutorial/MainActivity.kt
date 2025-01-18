@@ -163,9 +163,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showInfoWindow(position: LatLng, poi: Poi) {
-        if (infoWindow != null) {
-            infoWindow.remove()
-        }
 
         val body = GuiLayout(Orientation.Vertical)
         body.setPadding(15, 15, 15, 13)
@@ -202,7 +199,7 @@ class MainActivity : AppCompatActivity() {
         val options = InfoWindowOptions.from(position)
         options.setBody(body)
         options.setBodyOffset(0f, -4f)
-        //options.setTail(GuiImage(R.drawable.dongchunhouse, false))
+        options.setTail(GuiImage(R.drawable.dongchunhouse, false))
 
         //infoWindow = kakaoMaps.getMapWidgetManager()?.getInfoWindowLayer()!!.addInfoWindow(options)
         infoWindow = kakaoMaps.mapWidgetManager?.infoWindowLayer!!.addInfoWindow(options)
