@@ -43,6 +43,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.databinding.runtime)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     val nav_version = "2.4.1"
     // Views/Fragments integration
     implementation("androidx.navigation:navigation-fragment:$nav_version")
