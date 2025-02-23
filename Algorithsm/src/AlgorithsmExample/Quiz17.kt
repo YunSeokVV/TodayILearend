@@ -1,25 +1,23 @@
 package AlgorithsmExample
-// https://school.programmers.co.kr/learn/courses/30/lessons/181931
+// https://school.programmers.co.kr/learn/courses/30/lessons/120845
 class Quiz17 {
-    fun solution(a: Int, d: Int, included: BooleanArray): Int {
+    fun solution(box: IntArray, n: Int): Int {
         var answer: Int = 0
-        var currentNum = a
-        included.forEach { it ->
-            if(it){
-                answer += currentNum
-            }
-            currentNum += d
+        val result = IntArray(3)
+        box.forEachIndexed { index, it ->
+            result[index] = it / n
+            println(index)
         }
+
+        answer = result.reduce{acc, num -> acc * num}
+
         return answer
     }
-
-    fun solution2(a: Int, d: Int, included: BooleanArray) = included.indices.filter {
-        included[it] }.sumOf { a + d * it }
-
 }
 
 fun main() {
     val quiz17 = Quiz17()
-    val included = booleanArrayOf(true, false, false, true, true)
-    quiz17.solution(3, 4, included)
+    val data = intArrayOf(10, 8, 6)
+    val result = quiz17.solution(data, 3)
+    println(result)
 }
